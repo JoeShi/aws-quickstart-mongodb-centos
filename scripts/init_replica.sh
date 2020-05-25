@@ -35,12 +35,14 @@ fi
 
 echo "[mongodb-org-${version}]
 name=MongoDB Repository
-baseurl=http://repo.mongodb.org/yum/amazon/2013.03/mongodb-org/${version}/x86_64/
+baseurl=https://mirrors.testtest.vme360.com/mongodb/yum/el6-${version}/
 gpgcheck=0
 enabled=1" > /etc/yum.repos.d/mongodb-org-${version}.repo
 
 # To be safe, wait a bit for flush
 sleep 5
+# Refresh cache
+yum makecache
 
 yum --enablerepo=epel install node npm -y
 
