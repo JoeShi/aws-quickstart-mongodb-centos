@@ -49,6 +49,7 @@
                         "MongoDBVersion",
                         "MongoDBAdminUsername",
                         "MongoDBAdminPassword",
+                        "NodeOSType",
                         "NodeInstanceType",
                         "ReplicaShardIndex",
                         "VolumeSize",
@@ -96,6 +97,9 @@
                 },
                 "MongoDBVersion": {
                     "default": "MongoDB Version"
+                },
+                "NodeOSType": {
+                    "default": "Node OS Type"
                 },
                 "NodeInstanceType": {
                     "default": "Node Instance Type"
@@ -279,6 +283,15 @@
             ],
             "Description": "Number of Availability Zones to use in the VPC. This must match your selections in the list of Availability Zones parameter.",
             "Type": "String"
+        },
+        "NodeOSType": {
+            "Type": "String",
+            "Description": "Select the OS type for node instance. Default Amazon Linux",
+            "Default": "AMZNLINUX",
+            "AllowedValues": [
+                "AMZNLINUX",
+                "CENTOS7"
+            ]
         },
         "NodeInstanceType": {
             "Default": "m4.large",
@@ -614,6 +627,9 @@
                     },
                     "MongoDBAdminPassword": {
                         "Ref": "MongoDBAdminPassword"
+                    },
+                    "NodeOSType": {
+                        "Ref": "NodeOSType"
                     },
                     "NodeInstanceType": {
                         "Ref": "NodeInstanceType"

@@ -4,7 +4,7 @@
 # ------------------------------------------------------------------
 
 
-SCRIPT_DIR=/home/ec2-user/mongodb
+SCRIPT_DIR=/home/centos/mongodb
 if [ -z "${INSTALL_LOG_FILE}" ] ; then
     INSTALL_LOG_FILE=${SCRIPT_DIR}/install.log
 fi
@@ -36,10 +36,10 @@ log `date` signalFinalStatus.sh
 
 if [ "${SIGNAL}" == "0" ]; then
 ##  curl -X PUT -H 'Content-Type:' --data-binary '{"Status" : "SUCCESS","Reason" : "The MongoDB cluster has been installed and is ready","UniqueId" : "MongoDBCluster","Data" : "Done"}'  ${WAITHANDLER}
-   /opt/aws/bin/cfn-signal -e 0 -r "MongoDB Node install success." "${WAITHANDLER}"
+   /usr/bin/cfn-signal -e 0 -r "MongoDB Node install success." "${WAITHANDLER}"
 else
 ##  curl -X PUT -H 'Content-Type:' --data-binary '{"Status" : "FAILURE","Reason" : "The MongoDB cluster did not complete. Will delete all resources.","UniqueId" : "MongoDBCluster","Data" : "Failed"}'  ${WAITHANDLER}
-  /opt/aws/bin/cfn-signal -e 1 -r "MongoDB Node install did not succeed." "${WAITHANDLER}"
+  /usr/bin/cfn-signal -e 1 -r "MongoDB Node install did not succeed." "${WAITHANDLER}"
 fi
 
 log `date` END signalFinalStatus.sh

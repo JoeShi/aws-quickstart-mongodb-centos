@@ -479,7 +479,11 @@
                             "",
                             [
                                 "#!/bin/bash\n",
-                                "/opt/aws/bin/cfn-init -v --stack ",
+                                "yum install python-pip -y\n",
+                                "yum install awscli -y\n",
+                                "wget -O /tmp/aws-cfn-bootstrap-1.4.tar.gz https://s3.amazonaws.com/cloudformation-examples/aws-cfn-bootstrap-1.4-33.tar.gz\n",
+                                "pip install /tmp/aws-cfn-bootstrap-1.4.tar.gz\n",
+                                "/usr/bin/cfn-init -v --stack ",
                                 {
                                     "Ref": "AWS::StackName"
                                 },
@@ -489,8 +493,8 @@
                                     "Ref": "AWS::Region"
                                 },
                                 "\n",
-                                "mkdir -p /home/ec2-user/mongodb \n",
-                                "cd /home/ec2-user/mongodb \n",
+                                "mkdir -p /home/centos/mongodb \n",
+                                "cd /home/centos/mongodb \n",
                                 "aws s3 cp s3://",
                                 {
                                     "Fn::If": ["UsingDefaultBucket",  { "Fn::Sub": "${QSS3BucketName}-${AWS::Region}" }, {"Ref": "QSS3BucketName"}]
@@ -607,8 +611,8 @@
                                 "./init.sh > install.log 2>&1 \n",
                                 "#  Cleanup \n",
                                 "#rm -rf *\n",
-                                "chown -R ec2-user:ec2-user /home/ec2-user/ \n",
-                                "/home/ec2-user/mongodb/signalFinalStatus.sh 0\n"
+                                "chown -R centos:centos /home/centos/ \n",
+                                "/home/centos/mongodb/signalFinalStatus.sh 0\n"
                             ]
                         ]
                     }

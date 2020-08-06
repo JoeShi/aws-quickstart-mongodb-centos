@@ -34,6 +34,7 @@
                         "MongoDBVersion",
                         "MongoDBAdminUsername",
                         "MongoDBAdminPassword",
+                        "NodeOSType",
                         "NodeInstanceType",
                         "ReplicaShardIndex",
                         "VolumeSize",
@@ -72,6 +73,9 @@
                 },
                 "MongoDBVersion": {
                     "default": "MongoDB Version"
+                },
+                "NodeOSType": {
+                    "default": "Node OS Type"
                 },
                 "NodeInstanceType": {
                     "default": "Node Instance Type"
@@ -199,6 +203,15 @@
             "Description": "Iops of EBS volume when io1 type is chosen. Otherwise ignored",
             "Default": "100"
         },
+        "NodeOSType": {
+            "Type": "String",
+            "Description": "Select the OS type for node instance. Default Amazon Linux",
+            "Default": "AMZNLINUX",
+            "AllowedValues": [
+                "AMZNLINUX",
+                "CENTOS7"
+            ]
+        },
         "NodeInstanceType": {
             "Description": "Amazon EC2 instance type for the MongoDB nodes.",
             "Type": "String",
@@ -325,7 +338,8 @@
     "Mappings": {
         "AWSAMIRegionMap": {
             "AMI": {
-                "AMZNLINUX": "amzn-ami-hvm-2018.03.0.20190611-x86_64-gp2"
+                "AMZNLINUX": "amzn-ami-hvm-2018.03.0.20190611-x86_64-gp2",
+                "CENTOS7":  "CentOS-7.4.1708-with-ena-support"
             },
             "ap-northeast-1": {
                 "AMZNLINUX": "ami-02ddf94e5edc8e904"
@@ -370,10 +384,12 @@
                 "AMZNLINUX": "ami-079f731edfe27c29c"
             },
             "cn-north-1":{
-                "AMZNLINUX": "ami-04b1196830276cd1f"
+                "AMZNLINUX": "ami-04b1196830276cd1f",
+                "CENTOS7": "ami-0b98fa67d501109cc"
             },
             "cn-northwest-1":{
-                "AMZNLINUX": "ami-0bae393f70322bed6"
+                "AMZNLINUX": "ami-0bae393f70322bed6",
+                "CENTOS7": "ami-08e51110b73c7e7d6"
             }
         }
     },
@@ -631,7 +647,9 @@
                             {
                                 "Ref": "AWS::Region"
                             },
-                            "AMZNLINUX"
+                            {
+                                "Ref": "NodeOSType"
+                            }
                         ]
                     },
                     "ReplicaNodeNameTag": "PrimaryReplicaNode0",
@@ -738,7 +756,9 @@
                             {
                                 "Ref": "AWS::Region"
                             },
-                            "AMZNLINUX"
+                            {
+                                "Ref": "NodeOSType"
+                            }
                         ]
                     },
                     "ReplicaNodeNameTag": "SecondaryReplicaNode0",
@@ -846,7 +866,9 @@
                             {
                                 "Ref": "AWS::Region"
                             },
-                            "AMZNLINUX"
+                            {
+                                "Ref": "NodeOSType"
+                            }
                         ]
                     },
                     "ReplicaNodeNameTag": "SecondaryReplicaNode1",

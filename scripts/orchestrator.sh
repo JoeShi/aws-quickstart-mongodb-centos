@@ -2,7 +2,7 @@
 
 
 # Install jq to parse meta-data
-# MISC=/home/ec2-user/misc/bin/
+# MISC=/home/centos/misc/bin/
 # mkdir -p ${MISC}
 JQ_COMMAND=jq
 # [ ! -e ${JQ_COMMAND} ] && wget http://stedolan.github.io/jq/download/linux64/jq -O ${JQ_COMMAND}

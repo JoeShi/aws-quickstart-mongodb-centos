@@ -89,6 +89,26 @@ tests:
       - cn-north-1
     s3_bucket: ''
     template: templates/mongodb-master.template
+  mongodb-cn-centos:
+    parameters:
+      VPC: vpc-7b45291f
+      PrimaryNodeSubnet: subnet-1dbf0f79
+      Secondary0NodeSubnet: subnet-1dbf0f79
+      Secondary1NodeSubnet: subnet-1dbf0f79
+      BastionSecurityGroupID: sg-009ed48a290dc1b74
+      NodeOSType: CENTOS7
+      AvailabilityZones: $[alfred_genaz_2]
+      ClusterReplicaSetCount: '3'
+      KeyPairName: $[alfred_getkeypair]
+      MongoDBAdminPassword: T35TMong0
+      NumberOfAZs: '2'
+      QSS3BucketName: $[taskcat_autobucket]
+      QSS3BucketRegion: $[taskcat_current_region]
+      RemoteAccessCIDR: 0.0.0.0/0
+    regions:
+      - cn-north-1
+    s3_bucket: ''
+    template: templates/mongodb.template
   mongodb-cn-northwest-1-3-AZ:
     parameters:
       AvailabilityZones: $[alfred_genaz_3]
